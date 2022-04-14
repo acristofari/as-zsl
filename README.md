@@ -1,4 +1,4 @@
-# Lasso problems with zero-sum constraint
+# A decomposition method for lasso problems with zero-sum constraint
 
 _Active-Set Zero-Sum-Lasso_ (AS-ZSL) is a solver for the following lasso problem with zero-sum constraint:
 
