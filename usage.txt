@@ -1,0 +1,59 @@
+In this file, it is explained how to call AS-ZSL in Matlab to solve
+
+                    min 0.5*||Ax-y||^2 + lambda*||x||_1
+               s.t. sum(x) = 0
+
+with given matrix A, vector y and scalar lambda.
+-------------------------------------------------------------------------
+
+
+Usage.
+-------------------------------------------------------------------------
+X = as_zsl(A,Y,LAMBDA)
+X = as_zsl(A,Y,LAMBDA,OPTS)
+[X,X0] = as_zsl(__)
+[X,X0,AS_ZSL_INFO] = as_zsl(__)
+-------------------------------------------------------------------------
+
+
+Input arguments.
+-------------------------------------------------------------------------
+- A (required) is the matrix of covariates (each row is a sample),
+- Y (required) is the response vector,
+- LAMBDA (required) is the regularization parameter,
+- OPTS (optional) is a structure with algorithm options (see below).
+-------------------------------------------------------------------------
+
+
+Output arguments.
+-------------------------------------------------------------------------
+- X is the vector of regression coefficients;
+- X0 is the intercept;
+- AS_ZSL_INFO is a structure with the following fields:
+  'f' is the objective function value at X,
+  'it' is the number of iterations;
+  'flag' is an integer describing the exit condition:
+    0 if the optimality violation <= 'eps_opt'
+      (default value of 'eps_opt' = 1e-3),
+    1 if the number of iterations >= 'max_it'
+      (default value of 'max_it' = 100000),
+    2 if no sufficient decrease in the objective function has been obtained.
+-------------------------------------------------------------------------
+
+
+Options.
+-------------------------------------------------------------------------
+To change the values of the above parameters 'eps_opt'and 'max_it', use
+the structure OPTS (it is one of the input arguments of 'as_zsl', see
+above), having as field names the names of the parameters to be changed.
+Other parameters that can be changed in the same way are the following:
+- 'intercept': true for computing the intercept X0, false otherwise
+               (default value of 'intercept' = true),
+- 'verbosity': true for prints, false otherwise
+               (default value of 'verbosity' = false).
+
+LAMBDA can even be a vector of regularization parameters sorted in
+descending order. In this case, a warm start strategy is used to solve
+the problems and the output values have columns, each one referring to
+the corresponding regularization parameter.
+-------------------------------------------------------------------------
