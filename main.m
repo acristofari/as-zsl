@@ -13,7 +13,7 @@
 %  Reference paper:
 %  
 %  A. Cristofari (2022). A decomposition method for lasso problems with
-%  zero-sum constraint. http://www.optimization-online.org/DB_HTML/2022/04/8871.html
+%  zero-sum constraint. arXiv preprint 2204.07065
 %  
 %  ------------------------------------------------------------------------
 %  
@@ -21,7 +21,7 @@
 %  Andrea Cristofari (e-mail: andrea.cristofari@unipd.it)
 %  
 %  Last update of this file:
-%  April 14th, 2022
+%  April 19th, 2022
 % 
 %  Licensing:
 %  This file is part of AS-ZSL.
