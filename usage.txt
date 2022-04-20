@@ -22,7 +22,7 @@ Input arguments.
 - Y (required) is the response vector,
 - LAMBDA (required) is the regularization parameter (or a vector of
                     regularization parameters sorted in descending order,
-                    see below)
+                    see below),
 - OPTS (optional) is a structure with algorithm options (see below).
 -------------------------------------------------------------------------
 
