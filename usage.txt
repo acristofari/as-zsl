@@ -30,7 +30,7 @@ Input arguments.
 Output arguments.
 -------------------------------------------------------------------------
 - X is the vector of regression coefficients;
-- X0 is the intercept;
+- X0 is the intercept if required (see the options below), otherwise it is 0;
 - AS_ZSL_INFO is a structure with the following fields:
   'f' is the objective function value at X,
   'it' is the number of iterations;
