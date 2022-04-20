@@ -59,7 +59,7 @@ lambda = 0.5*peak2peak(A'*y)/2;
 % (2) Call AS-ZSL
 [x,x0,as_zsl_info] = as_zsl(A,y,lambda);
 
-% If 'lambda' is a vector of regularization parameters (sorted in descending order),
+% If 'lambda' is a vector of regularization parameters sorted in descending order,
 % then many problems will be solved by using a warm start strategy and the output
 % values have columns, each one referring to the corresponding regularization parameter.
 % For example:
