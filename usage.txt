@@ -3,7 +3,7 @@ In this file, it is explained how to call AS-ZSL in Matlab to solve
                     min 0.5*||Ax-y||^2 + lambda*||x||_1
                s.t. sum(x) = 0
 
-with given matrix A, vector y and scalar lambda.
+with given matrix A, vector y and non-negative scalar lambda.
 -------------------------------------------------------------------------
 
 
@@ -20,7 +20,9 @@ Input arguments.
 -------------------------------------------------------------------------
 - A (required) is the matrix of covariates (each row is a sample),
 - Y (required) is the response vector,
-- LAMBDA (required) is the regularization parameter,
+- LAMBDA (required) is the regularization parameter (or a vector of
+                    regularization parameters sorted in descending order,
+                    see below)
 - OPTS (optional) is a structure with algorithm options (see below).
 -------------------------------------------------------------------------
 
@@ -52,8 +54,8 @@ Other parameters that can be changed in the same way are the following:
 - 'verbosity': true for prints, false otherwise
                (default value of 'verbosity' = false).
 
-LAMBDA can even be a vector of regularization parameters sorted in
-descending order. In this case, a warm start strategy is used to solve
-the problems and the output values have columns, each one referring to
-the corresponding regularization parameter.
+If LAMBDA is a vector of regularization parameters sorted in descending
+order, a warm start strategy is used to solve the problems and the output
+values have columns, each one referring to the corresponding regularization
+parameter.
 -------------------------------------------------------------------------

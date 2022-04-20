@@ -6,7 +6,7 @@
 //                     min 0.5*||Ax-y||^2 + lambda*||x||_1
 //                s.t. sum(x) = 0
 // 
-// with given matrix A, vector y and scalar lambda.
+// with given matrix A, vector y and non-negative scalar lambda.
 // 
 // ------------------------------------------------------------------------
 // 
@@ -21,7 +21,7 @@
 // Andrea Cristofari (e-mail: andrea.cristofari@unipd.it)
 // 
 // Last update of this file:
-// April 19th, 2022
+// April 20th, 2022
 //
 // Licensing:
 // This file is part of AS-ZSL.

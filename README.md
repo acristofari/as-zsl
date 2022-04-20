@@ -2,10 +2,9 @@
 
 _Active-Set Zero-Sum-Lasso_ (AS-ZSL) is a solver for the following lasso problem with zero-sum constraint:
 
-         min 0.5*||Ax-y||^2 + lambda*||x||_1
-    s.t. sum(x) = 0
+<img src=https://latex.codecogs.com/svg.image?\min&space;||Ax-y|||^2&space;&plus;&space;\lambda||x||_1&space;\\\text{s.t.}&space;\sum_{i=1}^n&space;x_i&space;=&space;0>
 
-with given matrix _A_, vector _y_ and scalar _lambda_.
+with given matrix A, vector y and non-negative scalar &lambda;.
 
 AS-ZSL combines a tailored _active-set technique_, to identify the zero variables in the optimal solution,
 with a _2-coordinate descent scheme_.

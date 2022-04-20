@@ -6,7 +6,7 @@
 %                      min 0.5*||Ax-y||^2 + lambda*||x||_1
 %                 s.t. sum(x) = 0
 %  
-%  with given matrix A, vector y and scalar lambda.
+%  with given matrix A, vector y and non-negative scalar lambda.
 %  
 %  ------------------------------------------------------------------------
 %  
@@ -21,7 +21,7 @@
 %  Andrea Cristofari (e-mail: andrea.cristofari@unipd.it)
 %  
 %  Last update of this file:
-%  April 19th, 2022
+%  April 20th, 2022
 % 
 %  Licensing:
 %  This file is part of AS-ZSL.
@@ -59,8 +59,8 @@ lambda = 0.5*peak2peak(A'*y)/2;
 % (2) Call AS-ZSL
 [x,x0,as_zsl_info] = as_zsl(A,y,lambda);
 
-% If 'lambda' is a vector with p components (sorted in descending order),
-% then p problems will be solved by using a warm start strategy and the output
+% If 'lambda' is a vector of regularization parameters (sorted in descending order),
+% then many problems will be solved by using a warm start strategy and the output
 % values have columns, each one referring to the corresponding regularization parameter.
 % For example:
 % 
