@@ -2,7 +2,7 @@
 
 _Active-Set Zero-Sum-Lasso_ (AS-ZSL) is a solver for the following lasso problem with zero-sum constraint:
 
-<img src="https://latex.codecogs.com/svg.image?\min&space;||Ax-y|||^2&space;&plus;&space;\lambda||x||_1&space;\\\text{s.t.}&space;\sum_{i=1}^n&space;x_i&space;=&space;0">
+<img src="https://latex.codecogs.com/svg.image?\min&space;||Ax-y||^2&space;&plus;&space;\lambda||x||_1&space;\\\text{s.t.}&space;\sum_{i=1}^n&space;x_i&space;=&space;0">
 
 with given matrix A, vector y and non-negative scalar &lambda;.
 
