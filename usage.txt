@@ -55,7 +55,7 @@ Other parameters that can be changed in the same way are the following:
                (default value of 'verbosity' = false).
 
 If LAMBDA is a vector of regularization parameters sorted in descending
-order, a warm start strategy is used to solve the problems and the output
-values have columns, each one referring to the corresponding regularization
-parameter.
+order, then a warm start strategy is used to solve the problems and the
+output values have columns, each one referring to the corresponding
+regularization parameter.
 -------------------------------------------------------------------------
