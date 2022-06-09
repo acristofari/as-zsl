@@ -21,7 +21,7 @@
 // Andrea Cristofari (e-mail: andrea.cristofari@unipd.it)
 // 
 // Last update of this file:
-// April 20th, 2022
+// June 9th, 2022
 //
 // Licensing:
 // This file is part of AS-ZSL.
@@ -43,6 +43,7 @@
 #include "mex.h"
 #include "as_zsl.h"
 #include <string>
+#include <cmath>
 
 #ifndef mxGetDoubles
 #define mxGetDoubles mxGetPr

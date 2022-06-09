@@ -1,6 +1,7 @@
 #ifndef __AS_ZSL_H_INCLUDED__
 #define __AS_ZSL_H_INCLUDED__
 #include <vector>
+#include <cstddef>
 
 struct as_zsl_options {
 

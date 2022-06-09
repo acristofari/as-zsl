@@ -21,7 +21,7 @@
 // Andrea Cristofari (e-mail: andrea.cristofari@unipd.it)
 // 
 // Last update of this file:
-// April 20th, 2022
+// June 9th, 2022
 //
 // Licensing:
 // This file is part of AS-ZSL.
@@ -44,6 +44,7 @@
 #include <iostream>
 #include <numeric>
 #include <random>
+#include <algorithm>
 
 // constructor
 //-------------------------------------------------------------------------------------
