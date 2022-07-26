@@ -11,7 +11,6 @@ struct as_zsl_options {
     // DEFAULT VALUES OF AS-ZSL PARAMETERS
     // ==============================================
 
-    bool intercept = true;
     double eps_opt = 1e-3;
     int max_it = 100000;
     bool verbosity = false;
@@ -20,14 +19,14 @@ struct as_zsl_options {
 
 class As_zsl {
 private:
-    bool intercept,A_is_full;
+    bool A_is_full;
     unsigned int m,n,n_lambda,it,max_it,verbosity,n_non_act,flag,i,j;
     double lambda,eps_opt,f,f_quad,f_norm1,g_i,g_j;
     size_t *irs,*jcs;
     const double *lambda_vec;
     std::vector<bool> is_fixed;
     std::vector<unsigned int> it_vec,flag_vec,ind_non_act;
-    std::vector<double> x,u,f_vec,x0_vec;
+    std::vector<double> x,u,f_vec;
     std::vector<std::vector<double>> x_vec;
     double *A,*y;
     void solve_subproblem();
@@ -39,7 +38,6 @@ public:
         double * const label, const std::vector<double>& lam) : As_zsl(n_row, n_row, mat, row, col, label, lam, NULL){};
     void solve();
     const std::vector<std::vector<double>>& get_x();
-    const std::vector<double>& get_x0();
     const std::vector<double>& get_f();
     const std::vector<unsigned int>& get_it();
     const std::vector<unsigned int>& get_flag();

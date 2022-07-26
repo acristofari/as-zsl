@@ -11,8 +11,8 @@ Usage.
 -------------------------------------------------------------------------
 X = as_zsl(A,Y,LAMBDA)
 X = as_zsl(A,Y,LAMBDA,OPTS)
-[X,X0] = as_zsl(__)
-[X,X0,AS_ZSL_INFO] = as_zsl(__)
+[X,F] = as_zsl(...)
+[X,F,AS_ZSL_INFO] = as_zsl(...)
 -------------------------------------------------------------------------
 
 
@@ -30,9 +30,8 @@ Input arguments.
 Output arguments.
 -------------------------------------------------------------------------
 - X is the vector of regression coefficients;
-- X0 is the intercept if required (see the options below), otherwise it is 0;
+- F is the objective function value at X;
 - AS_ZSL_INFO is a structure with the following fields:
-  'f' is the objective function value at X,
   'it' is the number of iterations;
   'flag' is an integer describing the exit condition:
     0 if the optimality violation <= 'eps_opt'
@@ -48,14 +47,17 @@ Options.
 To change the values of the above parameters 'eps_opt'and 'max_it', use
 the structure OPTS (it is one of the input arguments of 'as_zsl', see
 above), having as field names the names of the parameters to be changed.
-Other parameters that can be changed in the same way are the following:
-- 'intercept': true for computing the intercept X0, false otherwise
-               (default value of 'intercept' = true),
-- 'verbosity': true for prints, false otherwise
-               (default value of 'verbosity' = false).
+Anther parameter that can be changed in the same way is 'verbosity',
+which can be set to true or false to have prints or not (the default value
+of 'verbosity' is false).
+-------------------------------------------------------------------------
 
-If LAMBDA is a vector of regularization parameters sorted in descending
-order, then a warm start strategy is used to solve the problems and the
-output values have columns, each one referring to the corresponding
-regularization parameter.
+
+Using more regularization parameters.
+-------------------------------------------------------------------------
+LAMBDA can even be a vector of regularization parameters sorted in
+descending order. In this case, to solve a problem for each
+regularization parameter, a warm start strategy is used and the output
+values have columns, each one referring to the corresponding regularization
+parameter.
 -------------------------------------------------------------------------

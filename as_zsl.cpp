@@ -18,10 +18,10 @@
 // ------------------------------------------------------------------------
 // 
 // Author:
-// Andrea Cristofari (e-mail: andrea.cristofari@unipd.it)
+// Andrea Cristofari (e-mail: andrea.cristofari@uniroma2.it)
 // 
 // Last update of this file:
-// June 9th, 2022
+// July 26th, 2022
 //
 // Licensing:
 // This file is part of AS-ZSL.
@@ -58,7 +58,6 @@ As_zsl::As_zsl(unsigned int n_row, unsigned int n_col, double * const mat,
     }
 
     eps_opt = opts->eps_opt;
-    intercept = opts->intercept;
     max_it = (unsigned int) opts->max_it;
     verbosity = opts->verbosity;
 
@@ -82,7 +81,6 @@ As_zsl::As_zsl(unsigned int n_row, unsigned int n_col, double * const mat,
     f_vec.resize(n_lambda);
     it_vec.resize(n_lambda);
     flag_vec.resize(n_lambda);
-    x0_vec.assign(n_lambda,0e0);
 
     if (row==NULL || col==NULL) {
         if (row!=NULL || col!=NULL) {
@@ -460,46 +458,6 @@ void As_zsl::solve() {
         it_vec[r] = it;
         flag_vec[r] = flag;
 
-        if (intercept) {
-            double Ax_mean = 0e0;
-            if (A_is_full) {
-                for (unsigned int h=0; h<n; h++) {
-                    if (x[h] != 0e0) {
-                        tmp = 0e0;
-                        A_col = A + h*m;
-                        for (unsigned int t=0; t<m; t++) {
-                            tmp += A_col[t];
-                        }
-                        Ax_mean += x[h]*tmp;
-                    }
-                }
-            } else {
-                for (unsigned int h=0; h<n; h++) {
-                    if (x[h] != 0e0) {
-                        tmp = 0e0;
-                        for (size_t t=jcs[h]; t<jcs[h+1]; t++) {
-                            tmp += A[t];
-                        }
-                        Ax_mean += x[h]*tmp;
-                    }
-                }
-            }
-            Ax_mean /= double(m);
-            x0_vec[r] = -Ax_mean;
-
-        }
-
-    }
-
-    if (intercept) {
-        double y_mean = 0e0;
-        for (unsigned int h=0; h<m; h++) {
-            y_mean += y[h];
-        }
-        y_mean /= double(m);
-        for (unsigned int r=0; r<n_lambda; r++) {
-            x0_vec[r] += y_mean;
-        }
     }
 
 }
@@ -589,12 +547,6 @@ void As_zsl::solve_subproblem() {
 //-------------------------------------------------------------------------------------
 const std::vector<std::vector<double>>& As_zsl::get_x() {
     return x_vec;
-}
-//-------------------------------------------------------------------------------------
-
-//-------------------------------------------------------------------------------------
-const std::vector<double>& As_zsl::get_x0() {
-    return x0_vec;
 }
 //-------------------------------------------------------------------------------------
 

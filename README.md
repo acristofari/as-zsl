@@ -18,7 +18,7 @@ This software is written in C++ and can be called from Matlab using a MEX file.
 
 ## Author
 
-Andrea Cristofari (e-mail: [andrea.cristofari@unipd.it](mailto:andrea.cristofari@unipd.it))
+Andrea Cristofari (e-mail: [andrea.cristofari@uniroma2.it](mailto:andrea.cristofari@uniroma2.it))
 
 ## Licensing
 

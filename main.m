@@ -18,10 +18,10 @@
 %  ------------------------------------------------------------------------
 %  
 %  Author:
-%  Andrea Cristofari (e-mail: andrea.cristofari@unipd.it)
+%  Andrea Cristofari (e-mail: andrea.cristofari@uniroma2.it)
 %  
 %  Last update of this file:
-%  April 20th, 2022
+%  July 26th, 2022
 % 
 %  Licensing:
 %  This file is part of AS-ZSL.
@@ -49,24 +49,27 @@ rng(1);
 make; % build the MEX file (just the first time)
 
 % (1) Get the problem (i.e., matrix of covariates 'A', response vector 'y' and regularization parameter 'lambda')
-m = 1000;
-n = 5000;
-W = randn(m,n);
-A = log(exp(W)./sum(exp(W),2));
+m = 1000; % number of samples
+n = 5000; % number of features
+E = exp(randn(m,n));
+A = log(E./sum(E,2)); % make data compositional and then apply a log transformation
+% A = A - mean(A); % to center the columns of A
 y = A*sprand(n,1,0.05) + normrnd(0,0.5,m,1);
+% y = y - mean(y); % to center y
 lambda = 0.5*peak2peak(A'*y)/2;
 
 % (2) Call AS-ZSL
-[x,x0,as_zsl_info] = as_zsl(A,y,lambda);
+[x,f,as_zsl_info] = as_zsl(A,y,lambda);
 
 % If 'lambda' is a vector of regularization parameters sorted in descending order,
-% then many problems will be solved by using a warm start strategy and the output
-% values have columns, each one referring to the corresponding regularization parameter.
+% then we have to solve a problem for each regularization parameter. In this case,
+% a warm start strategy is used and the output values have columns, each one
+% referring to the corresponding regularization parameter.
 % For example:
 % 
 % lambda_max = peak2peak(A'*y)/2;
 % lambda = logspace(log10(0.95*lambda_max),log10(1e-3*lambda_max),5);
-% [x,x0,as_zsl_info] = as_zsl(A,y,lambda);
+% [x,f,as_zsl_info] = as_zsl(A,y,lambda);
 
 
 %--------------------------------------------------------------------------
@@ -83,5 +86,5 @@ lambda = 0.5*peak2peak(A'*y)/2;
 %
 % - pass the structure to AS-ZSL as fourth input argument, e.g.,
 %
-%     [x,x0,as_zsl_info] = as_zsl(A,y,lambda,opts);
+%     [x,f,as_zsl_info] = as_zsl(A,y,lambda,opts);
 %--------------------------------------------------------------------------

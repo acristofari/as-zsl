@@ -18,10 +18,10 @@
 // ------------------------------------------------------------------------
 // 
 // Author:
-// Andrea Cristofari (e-mail: andrea.cristofari@unipd.it)
+// Andrea Cristofari (e-mail: andrea.cristofari@uniroma2.it)
 // 
 // Last update of this file:
-// June 9th, 2022
+// July 26th, 2022
 //
 // Licensing:
 // This file is part of AS-ZSL.
@@ -60,17 +60,11 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
     size_t *irs,*jcs;
 
     // check the number of inupts and outputs
-    if (nrhs<3) {
-        mexErrMsgTxt("At least three inputs are required.");
+    if (nrhs<3 || nrhs>4) {
+        mexErrMsgTxt("The number of inputs must be three or four.");
     }
-    if (nrhs>4) {
-        mexErrMsgTxt("At most four inputs are required.");
-    }
-    if (nlhs<1) {
-        mexErrMsgTxt("At least one input is required.");
-    }
-    if (nlhs>3) {
-        mexErrMsgTxt("At most outputs are required.");
+    if (nlhs<1 || nlhs>3) {
+        mexErrMsgTxt("The number of outputs must be between one and three.");
     }
 
     // check inputs
@@ -162,17 +156,12 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
                     mexErrMsgTxt("In the options, 'verbosity' must a logical.");
                 }
                 opts.verbosity = *mxGetLogicals(tmp_mxArray);
-            } else if (std::string(tmp_char).compare(std::string("intercept")) == 0) {
-                if (!mxIsScalar(tmp_mxArray) || !mxIsLogical(tmp_mxArray)) {
-                    mexErrMsgTxt("In the options, 'intercept' must a logical.");
-                }
-                opts.intercept = *mxGetLogicals(tmp_mxArray);
             } else {
                 mexErrMsgTxt("Not valid field name in the structure of options.");
             }
         }
     }
-
+    
     // call the solver
     As_zsl alg(m,n,A,irs,jcs,y,lambda,&opts);
     alg.solve();
@@ -191,36 +180,26 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
     if (nlhs > 1) {
         plhs[1] = mxCreateDoubleMatrix(1,n_lambda,mxREAL);
         mdbl_ptr = mxGetDoubles(plhs[1]);
-        cdbl_ptr = &alg.get_x0()[0];
+        cdbl_ptr = &alg.get_f()[0];
         for (unsigned int r=0; r<n_lambda; r++) {
             mdbl_ptr[r] = cdbl_ptr[r];
         }
         if (nlhs > 2) {
-            mxArray *pf = mxCreateDoubleMatrix(1,n_lambda,mxREAL);
             mxArray *pit = mxCreateDoubleMatrix(1,n_lambda,mxREAL);
             mxArray *pflag = mxCreateDoubleMatrix(1,n_lambda,mxREAL);
-            const unsigned int *cuint_ptr;
-            const char* as_zsl_field_names[] = {"f","it","flag"};
+            const char* as_zsl_field_names[] = {"it","flag"};
             mwSize as_zsl_info_dims[2] = {1,1};
-            plhs[2] = mxCreateStructArray(2,as_zsl_info_dims,3,as_zsl_field_names);
-            mdbl_ptr = mxGetDoubles(pf);
-            cdbl_ptr = &alg.get_f()[0];
-            for (unsigned int r=0; r<n_lambda; r++) {
-                mdbl_ptr[r] = cdbl_ptr[r];
-            }
-            mxSetField(plhs[2],0,as_zsl_field_names[0],pf);
+            plhs[2] = mxCreateStructArray(2,as_zsl_info_dims,2,as_zsl_field_names);
             mdbl_ptr = mxGetDoubles(pit);
-            cuint_ptr = &alg.get_it()[0];
             for (unsigned int r=0; r<n_lambda; r++) {
-                mdbl_ptr[r] = (double) cuint_ptr[r];
+                mdbl_ptr[r] = (double) (&alg.get_it()[0])[r];
             }
-            mxSetField(plhs[2],0,as_zsl_field_names[1],pit);
+            mxSetField(plhs[2],0,as_zsl_field_names[0],pit);
             mdbl_ptr = mxGetDoubles(pflag);
-            cuint_ptr = &alg.get_flag()[0];
             for (unsigned int r=0; r<n_lambda; r++) {
-                mdbl_ptr[r] = (double) cuint_ptr[r];
+                mdbl_ptr[r] = (double) (&alg.get_flag()[0])[r];
             }
-            mxSetField(plhs[2],0,as_zsl_field_names[2],pflag);
+            mxSetField(plhs[2],0,as_zsl_field_names[1],pflag);
         }
     }
     
