@@ -187,17 +187,20 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
         if (nlhs > 2) {
             mxArray *pit = mxCreateDoubleMatrix(1,n_lambda,mxREAL);
             mxArray *pflag = mxCreateDoubleMatrix(1,n_lambda,mxREAL);
+            const unsigned int *cuint_ptr;
             const char* as_zsl_field_names[] = {"it","flag"};
             mwSize as_zsl_info_dims[2] = {1,1};
             plhs[2] = mxCreateStructArray(2,as_zsl_info_dims,2,as_zsl_field_names);
             mdbl_ptr = mxGetDoubles(pit);
+            cuint_ptr = &alg.get_it()[0];
             for (unsigned int r=0; r<n_lambda; r++) {
-                mdbl_ptr[r] = (double) (&alg.get_it()[0])[r];
+                mdbl_ptr[r] = (double) cuint_ptr[r];
             }
             mxSetField(plhs[2],0,as_zsl_field_names[0],pit);
             mdbl_ptr = mxGetDoubles(pflag);
+            cuint_ptr = &alg.get_flag()[0];
             for (unsigned int r=0; r<n_lambda; r++) {
-                mdbl_ptr[r] = (double) (&alg.get_flag()[0])[r];
+                mdbl_ptr[r] = (double) cuint_ptr[r];
             }
             mxSetField(plhs[2],0,as_zsl_field_names[1],pflag);
         }
