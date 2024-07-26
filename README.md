@@ -15,7 +15,7 @@ This software is written in C++ and can be called from Matlab using a MEX file.
 
 [A. Cristofari (2024). A decomposition method for lasso problems with zero-sum constraint. European Journal of Operational Research 306(1), 358–369](https://doi.org/10.1016/j.ejor.2022.09.030).
 
-Author's note: due to a mistake during the publication process, problem (1) is erroneously referred to as (A.3) throughout the paper (an arXiv version is available which might help)
+Author's note: due to a mistake during the publication process, problem (1) is erroneously referred to as (A.3) throughout the paper (an arXiv version is available which might help).
 
 ## Author
 
