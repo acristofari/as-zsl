@@ -13,8 +13,9 @@ This software is written in C++ and can be called from Matlab using a MEX file.
 
 ## Reference paper
 
-[A. Cristofari (2022). _A decomposition method for lasso problems with zero-sum constraint._ arXiv preprint 2204.07065](https://arxiv.org/abs/2204.07065).
+[A. Cristofari (2024). A decomposition method for lasso problems with zero-sum constraint. European Journal of Operational Research 306(1), 358–369](https://doi.org/10.1016/j.ejor.2022.09.030).
 
+Author's note: due to a mistake during the publication process, problem (1) is erroneously referred to as (A.3) throughout the paper (an arXiv version is available which might help)
 
 ## Author
 
@@ -33,23 +34,12 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with AS-ZSL. If not, see <http://www.gnu.org/licenses/>.
 
-Copyright 2022 Andrea Cristofari.
+Copyright 2022-2024 Andrea Cristofari.
 
 ## How to use AS-ZSL in Matlab
 
-1. This directory should contain the following files:
+1. In Matlab, run `make.m` to build the MEX file.
 
-    * `as_zsl.cpp`,
-    * `as_zsl.h`,
-    * `as_zsl_matlab.cpp`,
-    * `COPYING.txt`,
-    * `main.m`,
-    * `make.m`,
-    * `README.md`,
-    * `usage.txt`.
+2. See the file `usage.txt` to know how to call AS-ZSL from Matlab, change algorithm parameters and get output values.
 
-2. In Matlab, run `make.m` to build the MEX file.
-
-3. See the file `usage.txt` to know how to call AS-ZSL from Matlab, change algorithm parameters and get output values.
-
-4. See the file `main.m` for an example. To run the example, just call `main.m` in Matlab.
+3. See the file `main.m` for an example. To run the example, just call `main.m` in Matlab.
